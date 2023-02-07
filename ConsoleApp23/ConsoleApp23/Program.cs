@@ -1,70 +1,47 @@
-﻿int number = 488243;
+﻿using ConsoleApp23;
 
-string numberAsString = number.ToString();
-char[] stringInArray = numberAsString.ToArray();
+Employee employee1 = new Employee("Joanna", "Kowal", 45);
+Employee employee2 = new Employee("Anna", "Warzecha", 34);
+Employee employee3 = new Employee("Mariusz", "Wąs", 29);
 
-for (int i = 0; i < 10; i++)
+List<Employee> employees = new List<Employee>();
+
+employee1.AddJobEvaluation(5);
+employee1.AddJobEvaluation(5);
+employee1.AddJobEvaluation(9);
+employee1.AddJobEvaluation(4);
+employee1.AddJobEvaluation(6);
+employees.Add(employee1);
+
+
+employee2.AddJobEvaluation(7);
+employee2.AddJobEvaluation(2);
+employee2.AddJobEvaluation(9);
+employee2.AddJobEvaluation(9);
+employee2.AddJobEvaluation(8);
+employees.Add(employee2);
+
+employee3.AddJobEvaluation(8);
+employee3.AddJobEvaluation(3); 
+employee3.AddJobEvaluation(8);
+employee3.AddJobEvaluation(2);
+employee3.AddJobEvaluation(1);
+employees.Add(employee3);
+
+int result1 = employee1.Result2;
+int result2 = employee2.Result2;
+int result3 = employee3.Result2;
+
+int maxResult = -1;
+Employee employeeWithBestEvaluation = null;
+
+foreach (var employee in employees)
 {
-    string iAsString = i.ToString();
-    int counter = 0;
-    foreach (char itemChar in stringInArray)
+    if (employee.Result2>maxResult)
     {
-        string itemCharAsString = itemChar.ToString();
-
-        if (itemCharAsString==iAsString)
-        {
-            counter++;
-        }
+        maxResult = employee.Result2;
+        employeeWithBestEvaluation= employee;
     }
-    Console.WriteLine(i +"-->"+ counter+ "\n");
 }
+Console.WriteLine($"Osoba z najwyższą ilością punktów: {employeeWithBestEvaluation.Name} {employeeWithBestEvaluation.Surname}, otrzymała {employeeWithBestEvaluation.Result2} punktów");
 
-//int licznik0 = 0;
-//int licznik1 = 0;
-//int licznik2 = 0;
-//int licznik3 = 0;
-//int licznik4 = 0;
-//int licznik5 = 0;
-//int licznik6 = 0;
-//int licznik7 = 0;
-//int licznik8 = 0;
-//int licznik9 = 0;
-
-
-//foreach (char c in liczbaTab)
-//{
-//    if(c=='0')
-//    { licznik0++; }
-
-//    if (c=='0')
-//    { licznik0++; }
-
-//    if (c=='1')
-//    { licznik1++; }
-
-//    if (c=='2')
-//    { licznik2++; }
-
-//    if (c=='3')
-//    { licznik3++; }
-
-//    if (c=='4')
-//    { licznik4++; }
-
-//    if (c=='5')
-//    { licznik5++; }
-
-//    if (c=='6')
-//    { licznik6++; }
-
-//    if (c=='7')
-//    { licznik7++; }
-
-//    if (c=='8')
-//    { licznik8++; }
-
-//    if (c=='9')
-//    { licznik9++; }
-//}
-//Console.WriteLine("Twoja liczba to:  " + liczba + "\n skałada się z następujących ilości cyf");
-//Console.WriteLine("0-->" + licznik0 + "\n" + "1-->" + licznik1 + "\n" +"2-->" + licznik2 + "\n" +"3-->" + licznik3 + "\n" +"4-->" + licznik4 + "\n" +"5-->" + licznik5 + "\n" +"6-->" + licznik6 + "\n" +"7-->" + licznik7 + "\n" +"8-->" + licznik8 + "\n" +"9-->" + licznik9);
