@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApp23
 {
-    class Employee
+    public class Employee
     {
         private List<int> jobEvaluation = new List<int>();        
 
@@ -20,7 +20,7 @@
             //dodawaj kolejne wartości number do listy
         }
         
-        public int Result2
+        public int Result
         {
             get { return this.jobEvaluation.Sum(); }
             //zwraca sumę elementów z listy jobEvaluation

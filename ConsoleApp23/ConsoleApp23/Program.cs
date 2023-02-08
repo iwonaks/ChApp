@@ -28,20 +28,20 @@ employee3.AddJobEvaluation(2);
 employee3.AddJobEvaluation(1);
 employees.Add(employee3);
 
-int result1 = employee1.Result2;
-int result2 = employee2.Result2;
-int result3 = employee3.Result2;
+int result1 = employee1.Result;
+int result2 = employee2.Result;
+int result3 = employee3.Result;
 
-int maxResult = -1;
+int maxResult = int.MinValue;
 Employee employeeWithBestEvaluation = null;
 
 foreach (var employee in employees)
 {
-    if (employee.Result2>maxResult)
+    if (employee.Result>maxResult)
     {
-        maxResult = employee.Result2;
+        maxResult = employee.Result;
         employeeWithBestEvaluation= employee;
     }
 }
-Console.WriteLine($"Osoba z najwyższą ilością punktów: {employeeWithBestEvaluation.Name} {employeeWithBestEvaluation.Surname}, otrzymała {employeeWithBestEvaluation.Result2} punktów");
+Console.WriteLine($"Osoba z najwyższą ilością punktów: {employeeWithBestEvaluation.Name} {employeeWithBestEvaluation.Surname}, otrzymała {employeeWithBestEvaluation.Result} punktów");
 
