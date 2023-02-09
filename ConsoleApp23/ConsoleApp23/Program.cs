@@ -4,44 +4,26 @@ Employee employee1 = new Employee("Joanna", "Kowal", 45);
 Employee employee2 = new Employee("Anna", "Warzecha", 34);
 Employee employee3 = new Employee("Mariusz", "Wąs", 29);
 
-List<Employee> employees = new List<Employee>();
+employee1.AddGrade(3);
+//employee1.AddGrade(5);
+//employee1.AddGrade(9);
+employee1.AddGrade(4);
+employee1.AddGrade(6);
 
-employee1.AddJobEvaluation(5);
-employee1.AddJobEvaluation(5);
-employee1.AddJobEvaluation(9);
-employee1.AddJobEvaluation(4);
-employee1.AddJobEvaluation(6);
-employees.Add(employee1);
+var statistics  = employee1.GetStatistics();
+Console.WriteLine($"Average: {statistics.Average:N2} Max: {statistics.Max} Min: {statistics.Min}");
 
 
-employee2.AddJobEvaluation(7);
-employee2.AddJobEvaluation(2);
-employee2.AddJobEvaluation(9);
-employee2.AddJobEvaluation(9);
-employee2.AddJobEvaluation(8);
-employees.Add(employee2);
+employee2.AddGrade(7);
+employee2.AddGrade(2);
+employee2.AddGrade(9);
+employee2.AddGrade(9);
+employee2.AddGrade(8);
 
-employee3.AddJobEvaluation(8);
-employee3.AddJobEvaluation(3); 
-employee3.AddJobEvaluation(8);
-employee3.AddJobEvaluation(2);
-employee3.AddJobEvaluation(1);
-employees.Add(employee3);
+employee3.AddGrade(8);
+employee3.AddGrade(3); 
+employee3.AddGrade(8);
+employee3.AddGrade(2);
+employee3.AddGrade(1);
 
-int result1 = employee1.Result;
-int result2 = employee2.Result;
-int result3 = employee3.Result;
-
-int maxResult = int.MinValue;
-Employee employeeWithBestEvaluation = null;
-
-foreach (var employee in employees)
-{
-    if (employee.Result>maxResult)
-    {
-        maxResult = employee.Result;
-        employeeWithBestEvaluation= employee;
-    }
-}
-Console.WriteLine($"Osoba z najwyższą ilością punktów: {employeeWithBestEvaluation.Name} {employeeWithBestEvaluation.Surname}, otrzymała {employeeWithBestEvaluation.Result} punktów");
 

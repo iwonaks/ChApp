@@ -2,7 +2,7 @@
 {
     public class Employee
     {
-        private List<int> jobEvaluation = new List<int>();        
+        private List<float> grades = new List<float>();        
 
         public Employee(string name, string surname, int age)
         {
@@ -14,16 +14,32 @@
         public string Surname { get; private set; }
         public int Age { get; private set; }
 
-        public void AddJobEvaluation(int number)
+        public void AddGrade(float grade)
         {
-            this.jobEvaluation.Add(number);
+            this.grades.Add(grade);
             //dodawaj kolejne wartości number do listy
         }
-        
-        public int Result
+
+        public Statistics GetStatistics()
         {
-            get { return this.jobEvaluation.Sum(); }
-            //zwraca sumę elementów z listy jobEvaluation
+            var stat = new Statistics();
+
+            stat.Average = 0;
+            stat.Min = float.MaxValue;
+            stat.Max = float.MinValue;
+
+            foreach(var grade in this.grades)
+            {
+                stat.Max = Math.Max(stat.Max, grade);
+                stat.Min = Math.Min(stat.Min, grade);
+
+                stat.Average += grade;
+            }
+
+            stat.Average/= this.grades.Count;
+
+            return stat;
         }
+
     }
 }
