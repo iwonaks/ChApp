@@ -43,8 +43,7 @@ namespace ConsoleApp23
                     this.grades.Add(30);
                     break;
                 default:
-                    Console.WriteLine("Ocena poza zakresem, nie została dodana");
-                    break;
+                    throw new Exception("Ocena poza zakresem, nie została dodana");
             }
         }
 
@@ -72,7 +71,7 @@ namespace ConsoleApp23
             }
             else
             {
-                Console.WriteLine("Wprowadzonej wartości nie można przekszatałcić na liczbę");
+                throw new Exception("Wprowadzonej wartości nie można przekszatałcić na liczbę");
             }
         }
 

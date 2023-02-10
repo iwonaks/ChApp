@@ -5,16 +5,27 @@ employee.AddGrade(70);
 employee.AddGrade(80);
 employee.AddGrade(10);
 
-while(true)
+while (true)
 {
     Console.WriteLine("Podaj oceny dla pracownika, aby zakończyć i zobaczyć statystyki wciśnij 'q'");
     Console.WriteLine("...........................");
     string input = Console.ReadLine();
-    if(input=="q" || input =="Q")
+    if (input=="q" || input =="Q")
     {
         break;
     }
-    employee.AddGrade(input);
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    finally
+    {
+        Console.WriteLine("Kontynuujemy");
+    }
 }
 var statistics = employee.GetStatistics();
 
