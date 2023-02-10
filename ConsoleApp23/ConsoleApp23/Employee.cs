@@ -2,7 +2,7 @@
 {
     public class Employee
     {
-        private List<float> grades = new List<float>();        
+        private List<float> grades = new List<float>();
 
         public Employee(string name, string surname, int age)
         {
@@ -16,8 +16,42 @@
 
         public void AddGrade(float grade)
         {
-            this.grades.Add(grade);
-            //dodawaj kolejne wartości number do listy
+            if (grade>0 && grade <200) //walidacja
+            {
+                this.grades.Add(grade);
+                //dodawaj kolejne wartości number do listy
+            }
+            else
+            {
+                Console.WriteLine("Błędny zakres");
+            }
+        }
+
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))
+            {
+                this.grades.Add(result);
+            }
+            else
+            {
+                Console.WriteLine("Wprowadzonej wartości nie można przekszatałcić na liczbę");
+            }
+        }
+
+        public void AddGrade(double grade)
+        {
+            double gradeRound = Math.Round(grade, 2);
+            float gradeFloat = (float)gradeRound;
+
+            this.grades.Add(gradeFloat);
+        }
+
+        public void AddGrade(int grade)
+        {
+            float gradeInt = (float)grade;
+
+            this.grades.Add(gradeInt);
         }
 
         public Statistics GetStatistics()
@@ -28,7 +62,7 @@
             stat.Min = float.MaxValue;
             stat.Max = float.MinValue;
 
-            foreach(var grade in this.grades)
+            foreach (var grade in this.grades)
             {
                 stat.Max = Math.Max(stat.Max, grade);
                 stat.Min = Math.Min(stat.Min, grade);
@@ -40,6 +74,5 @@
 
             return stat;
         }
-
     }
 }
