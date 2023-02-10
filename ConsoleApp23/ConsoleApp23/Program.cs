@@ -1,26 +1,21 @@
 ﻿using ConsoleApp23;
 
-Employee employee1 = new Employee("Joanna", "Kowal", 45);
-Employee employee2 = new Employee("Anna", "Warzecha", 34);
-Employee employee3 = new Employee("Mariusz", "Wąs", 29);
+var employee = new Employee();
+employee.AddGrade(70);
+employee.AddGrade(80);
+employee.AddGrade(10);
 
-employee1.AddGrade(3.3566666);
-employee1.AddGrade("8");
-employee1.AddGrade("7");
-employee1.AddGrade(4);
-employee1.AddGrade(6);
+while(true)
+{
+    Console.WriteLine("Podaj oceny dla pracownika, aby zakończyć i zobaczyć statystyki wciśnij 'q'");
+    Console.WriteLine("...........................");
+    string input = Console.ReadLine();
+    if(input=="q" || input =="Q")
+    {
+        break;
+    }
+    employee.AddGrade(input);
+}
+var statistics = employee.GetStatistics();
 
-var statistics = employee1.GetStatistics();
-Console.WriteLine($"Average: {statistics.Average:N2} Max: {statistics.Max:N2} Min: {statistics.Min:N2}");
-
-employee2.AddGrade(7);
-employee2.AddGrade(2);
-employee2.AddGrade(9);
-employee2.AddGrade(9);
-employee2.AddGrade(8);
-
-employee3.AddGrade(8);
-employee3.AddGrade(3);
-employee3.AddGrade(8);
-employee3.AddGrade(2);
-employee3.AddGrade(1);
+Console.WriteLine($"Najniższa ocena: {statistics.Min},\nnajwyższa: {statistics.Max},\nŚrednia ocen: {statistics.Average:N2}, co daje ocenę końcową: {statistics.AverageLetter}");

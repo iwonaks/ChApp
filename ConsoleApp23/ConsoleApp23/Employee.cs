@@ -6,6 +6,11 @@ namespace ConsoleApp23
     {
         private List<float> grades = new List<float>();
 
+
+        public Employee()
+        {
+        }
+
         public Employee(string name, string surname, int age)
         {
             this.Name=name;
@@ -16,12 +21,38 @@ namespace ConsoleApp23
         public string Surname { get; private set; }
         public int Age { get; private set; }
 
+
+        public void AddGrade(char grade)
+        {
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.grades.Add(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.grades.Add(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.grades.Add(50);
+                    break;
+                case 'D':
+                case 'd':
+                    this.grades.Add(30);
+                    break;
+                default:
+                    Console.WriteLine("Ocena poza zakresem, nie została dodana");
+                    break;
+            }
+        }
+
         public void AddGrade(float grade)
         {
-            if (grade>0 && grade <200) //walidacja
+            if (grade>=0 && grade <= 100)
             {
                 this.grades.Add(grade);
-                //dodawaj kolejne wartości number do listy
             }
             else
             {
@@ -33,7 +64,11 @@ namespace ConsoleApp23
         {
             if (float.TryParse(grade, out float result))
             {
-                this.grades.Add(result);
+                this.AddGrade(result);
+            }
+            else if (char.TryParse(grade, out char result2))
+            {
+                this.AddGrade(result2);
             }
             else
             {
@@ -45,14 +80,14 @@ namespace ConsoleApp23
         {
             float gradeFloat = (float)grade;
 
-            this.grades.Add(gradeFloat);
+            this.AddGrade(gradeFloat);
         }
 
         public void AddGrade(int grade)
         {
             float gradeInt = (float)grade;
 
-            this.grades.Add(gradeInt);
+            this.AddGrade(gradeInt);
         }
 
         public Statistics GetStatistics()
@@ -72,7 +107,30 @@ namespace ConsoleApp23
             }
             stat.Average/= this.grades.Count;
 
+            GetAverageAsLetter(stat);
+
             return stat;
+        }
+        private static void GetAverageAsLetter(Statistics stat)
+        {
+            switch (stat.Average)
+            {
+                case var a when a == 100:
+                    stat.AverageLetter = 'A';
+                    break;
+                case var a when a  >= 80:
+                    stat.AverageLetter = 'B';
+                    break;
+                case var a when a  >= 50:
+                    stat.AverageLetter = 'C';
+                    break;
+                case var a when a  >= 30:
+                    stat.AverageLetter = 'D';
+                    break;
+                default:
+                    Console.WriteLine("Nie uzyskałeś wystarczającej średniej do zaliczenia");
+                    break;
+            }
         }
     }
 }
