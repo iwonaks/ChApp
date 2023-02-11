@@ -1,26 +1,30 @@
 ﻿using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace ConsoleApp23
 {
-    public class Employee
+    public class Employee : Person
     {
         private List<float> grades = new List<float>();
 
-
         public Employee()
+            :this(null, null, default)  
         {
+            this.Name = null;
+            this.Surname = null;
+            this.Age = default;
         }
 
         public Employee(string name, string surname, int age)
+            :base (name)
         {
-            this.Name=name;
-            this.Surname=surname;
-            this.Age=age;
+            this.Surname = surname;
+            this.Age = age;
         }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-        public int Age { get; private set; }
-
+        
+        string Name { get; set; }
+        string Surname { get; set; }
+        int Age { get; set; }
 
         public void AddGrade(char grade)
         {

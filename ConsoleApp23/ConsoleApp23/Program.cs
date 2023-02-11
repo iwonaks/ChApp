@@ -1,9 +1,9 @@
 ﻿using ConsoleApp23;
 
 var employee = new Employee();
-employee.AddGrade(70);
-employee.AddGrade(80);
-employee.AddGrade(10);
+//employee.AddGrade(70);
+//employee.AddGrade(80);
+//employee.AddGrade(10);
 
 while (true)
 {
