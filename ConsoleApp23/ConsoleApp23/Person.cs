@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace ConsoleApp23
 {
-    public class Person
+    public abstract class Person
     {
         public Person(string name)
         {
