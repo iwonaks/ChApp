@@ -3,28 +3,25 @@ using System.Xml.Linq;
 
 namespace ConsoleApp23
 {
-    public class Employee : Person
+    public class Employee : IEmployee
     {
         private List<float> grades = new List<float>();
 
         public Employee()
-            :this(null, null, default)  
         {
-            this.Name = null;
-            this.Surname = null;
-            this.Age = default;
+       
         }
 
         public Employee(string name, string surname, int age)
-            :base (name)
         {
+            this.Name = name;
             this.Surname = surname;
             this.Age = age;
         }
-        
-        string Name { get; set; }
-        string Surname { get; set; }
-        int Age { get; set; }
+
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public int Age { get; set; }
 
         public void AddGrade(char grade)
         {
@@ -34,20 +31,25 @@ namespace ConsoleApp23
                 case 'a':
                     this.grades.Add(100);
                     break;
+
                 case 'B':
                 case 'b':
                     this.grades.Add(80);
                     break;
+
                 case 'C':
                 case 'c':
                     this.grades.Add(50);
                     break;
+
                 case 'D':
                 case 'd':
                     this.grades.Add(30);
                     break;
+
                 default:
                     throw new Exception("Ocena poza zakresem, nie została dodana");
+                    break;
             }
         }
 
@@ -59,7 +61,7 @@ namespace ConsoleApp23
             }
             else
             {
-                Console.WriteLine("Błędny zakres");
+                throw new Exception("invalid garde value");
             }
         }
 
@@ -121,17 +123,20 @@ namespace ConsoleApp23
                 case var a when a == 100:
                     stat.AverageLetter = 'A';
                     break;
+
                 case var a when a  >= 80:
                     stat.AverageLetter = 'B';
                     break;
+
                 case var a when a  >= 50:
                     stat.AverageLetter = 'C';
                     break;
+
                 case var a when a  >= 30:
                     stat.AverageLetter = 'D';
                     break;
+
                 default:
-                    Console.WriteLine("Nie uzyskałeś wystarczającej średniej do zaliczenia");
                     break;
             }
         }

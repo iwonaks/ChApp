@@ -9,12 +9,10 @@ namespace ConsoleApp23
         {
             this.Name = name;
         }
-
         public string Name { get; private set; }
 
         public Person()
         {
         }
-
     }
 }
