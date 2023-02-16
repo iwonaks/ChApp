@@ -1,28 +1,25 @@
 ﻿namespace ConsoleApp23
 {
-    public class Supervisor : Person
+    public class Supervisor : EmployeeBase
     {
         private List<float> grades = new List<float>();
         public Supervisor()
         {
-            this.Name = default;
-            this.Surname = default;
-            this.Age= default;
+
         }
-        public Supervisor(string name, string surname, int age)
+        public Supervisor(int age, string name, string surname)
+            :base(age,name, surname)
         {
-            this.Name=name;
-            this.Surname=surname;
-            this.Age=age;
+
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
 
         public int Age { get; set; }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statSupervisor = new Statistics();
 
@@ -36,18 +33,18 @@
                 statSupervisor.Min = Math.Min(statSupervisor.Min, grade);
 
                 statSupervisor.Average += grade;
-            }
+            } 
             statSupervisor.Average/= this.grades.Count;
 
             return statSupervisor;
         }
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float gradeInt = (float)grade;
             this.AddGrade(gradeInt);
         }
         
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             switch (grade)
             {
@@ -129,19 +126,24 @@
             }
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             throw new Exception("");
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             throw new Exception("");
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             throw new Exception("");
+        }
+
+        public override Statistics CountStatistics(List<float> grades)
+        {
+            throw new NotImplementedException();
         }
     }
 }

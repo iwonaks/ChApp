@@ -8,7 +8,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetAverageEmployeeStatistic()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(3);
             employee.AddGrade(6);
@@ -22,7 +22,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetMinEmployeeStatistic()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(3);
             employee.AddGrade(6);
@@ -36,7 +36,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetMaxEmployeeStatistic()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(3);
             employee.AddGrade(6);
@@ -50,7 +50,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetEmployeeGradeAsLetterA()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(100);
             employee.AddGrade(100);
@@ -67,7 +67,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetEmployeeGradeAsLetterB()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(80);
             employee.AddGrade(80);
@@ -84,7 +84,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetEmployeeGradeAsLetterC()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(50);
             employee.AddGrade(60);
@@ -101,7 +101,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetEmployeeGradeAsLetterD()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(20);
             employee.AddGrade(70);
@@ -118,7 +118,7 @@ namespace ChallengeApp23.Test
         [Test]
         public void GetEmployeeGradeAsBadLetter()
         {
-            var employee = new Employee("Iwona", "Ks", 46);
+            var employee = new EmployeeInMemory(46, "Iwona", "Ks");
 
             employee.AddGrade(29);
             employee.AddGrade(29);

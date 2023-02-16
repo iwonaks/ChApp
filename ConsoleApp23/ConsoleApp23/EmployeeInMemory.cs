@@ -3,27 +3,26 @@ using System.Xml.Linq;
 
 namespace ConsoleApp23
 {
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
         private List<float> grades = new List<float>();
 
-        public Employee()
+        public EmployeeInMemory()
         {
        
         }
 
-        public Employee(string name, string surname, int age)
-        {
-            this.Name = name;
-            this.Surname = surname;
-            this.Age = age;
+        public EmployeeInMemory(int age, string name, string surname)
+            :base(age, name, surname) 
+        {  
         }
 
+        public int Age { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int Age { get; set; }
+        
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             switch (grade)
             {
@@ -53,7 +52,7 @@ namespace ConsoleApp23
             }
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade>=0 && grade <= 100)
             {
@@ -65,7 +64,7 @@ namespace ConsoleApp23
             }
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
             {
@@ -80,22 +79,22 @@ namespace ConsoleApp23
                 throw new Exception("Wprowadzonej wartości nie można przekszatałcić na liczbę");
             }
         }
-
-        public void AddGrade(double grade)
+        
+        public override void AddGrade(double grade)
         {
             float gradeFloat = (float)grade;
 
             this.AddGrade(gradeFloat);
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float gradeInt = (float)grade;
 
             this.AddGrade(gradeInt);
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var stat = new Statistics();
 
@@ -139,6 +138,11 @@ namespace ConsoleApp23
                 default:
                     break;
             }
+        }
+
+        public override Statistics CountStatistics(List<float> grades)
+        {
+            throw new NotImplementedException();
         }
     }
 }

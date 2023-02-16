@@ -45,9 +45,9 @@ namespace ChallengeApp23.Test
             Assert.AreNotEqual(employee1, employee2);
         }
 
-        private Employee GetUser(string name, string surname, int age) //metoda tworząca nowego użytkownika
+        private EmployeeInMemory GetUser(string name, string surname, int age) //metoda tworząca nowego użytkownika
         {
-            return new Employee(name, surname, age);
+            return new EmployeeInMemory(name, surname, age);
         }
     }
 }
