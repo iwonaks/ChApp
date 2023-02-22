@@ -1,6 +1,20 @@
 ﻿using ConsoleApp23;
 
 var employee = new EmployeeInFile();
+
+employee.GradeAddedToStatistics+=EmployeeGradeAdded;
+employee.GradeSaveToFile+= EmployeeGradeSaveToFile;
+
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dołączono oceny z pliku do statystyk");
+}
+
+void EmployeeGradeSaveToFile(object sender, EventArgs args)
+{
+    Console.WriteLine("Zapisano ocenę w pliku");
+}
+
 //employee.AddGrade(70);
 //employee.AddGrade(80);
 //employee.AddGrade(10);
@@ -86,4 +100,3 @@ switch (input)
         Console.WriteLine("Wprowadź właściwy klawisz");
         break;
 }
-

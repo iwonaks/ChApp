@@ -7,6 +7,8 @@ namespace ConsoleApp23
     {
         private const string fileName = "gradesEmployee.txt";
 
+        public override event FeedbakToAddGrade GradeAddedToStatistics;
+        public override event FeedbakToAddGrade GradeSaveToFile;
 
         public EmployeeInFile()
         {
@@ -23,6 +25,11 @@ namespace ConsoleApp23
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+
+                    if (GradeSaveToFile!=null)
+                    {
+                        GradeSaveToFile(this, new EventArgs());
+                    }
                 }
             }
             else
@@ -104,11 +111,15 @@ namespace ConsoleApp23
                         grades.Add(lineFloat);
                         line = reader.ReadLine();
                     }
+                    if (GradeAddedToStatistics!= null)
+                    {
+                        GradeAddedToStatistics(this, new EventArgs());
+                    }
                 }
             }
             return grades;
         }
-
+    
     public override Statistics CountStatistics(List<float> grades)
     {
         var stat = new Statistics();

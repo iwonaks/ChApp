@@ -7,20 +7,24 @@ namespace ConsoleApp23
     {
         private List<float> grades = new List<float>();
 
+        public override event FeedbakToAddGrade GradeAddedToStatistics;
+        public override event FeedbakToAddGrade GradeSaveToFile;
+
         public EmployeeInMemory()
         {
-       
+
         }
 
         public EmployeeInMemory(int age, string name, string surname)
-            :base(age, name, surname) 
-        {  
+            : base(age, name, surname)
+        {
+
         }
 
         public int Age { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        
+
 
         public override void AddGrade(char grade)
         {
@@ -57,6 +61,11 @@ namespace ConsoleApp23
             if (grade>=0 && grade <= 100)
             {
                 this.grades.Add(grade);
+
+                if (GradeAddedToStatistics!= null)
+                {
+                    GradeAddedToStatistics(this, new EventArgs());
+                }
             }
             else
             {
@@ -79,7 +88,7 @@ namespace ConsoleApp23
                 throw new Exception("Wprowadzonej wartości nie można przekszatałcić na liczbę");
             }
         }
-        
+
         public override void AddGrade(double grade)
         {
             float gradeFloat = (float)grade;

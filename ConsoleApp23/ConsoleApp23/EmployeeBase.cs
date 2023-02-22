@@ -7,9 +7,9 @@ namespace ConsoleApp23
         public string Name { get; private set; }
         public string Surname { get; private set; }
 
-        public EmployeeBase() 
+        public EmployeeBase()
         {
-        
+
         }
 
         public EmployeeBase(int age, string name, string surname)
@@ -25,5 +25,11 @@ namespace ConsoleApp23
         public abstract void AddGrade(char grade);
         public abstract Statistics GetStatistics();
         public abstract Statistics CountStatistics(List<float> grades);
+
+        public delegate void FeedbakToAddGrade(Object sender, EventArgs args);
+
+        public abstract event FeedbakToAddGrade GradeAddedToStatistics;
+
+        public abstract event FeedbakToAddGrade GradeSaveToFile;
     }
 }

@@ -3,12 +3,15 @@
     public class Supervisor : EmployeeBase
     {
         private List<float> grades = new List<float>();
+
+        public override event FeedbakToAddGrade GradeAddedToStatistics;
+        public override event FeedbakToAddGrade GradeSaveToFile;
         public Supervisor()
         {
 
         }
         public Supervisor(int age, string name, string surname)
-            :base(age,name, surname)
+            : base(age, name, surname)
         {
 
         }
@@ -33,7 +36,7 @@
                 statSupervisor.Min = Math.Min(statSupervisor.Min, grade);
 
                 statSupervisor.Average += grade;
-            } 
+            }
             statSupervisor.Average/= this.grades.Count;
 
             return statSupervisor;
@@ -43,7 +46,7 @@
             float gradeInt = (float)grade;
             this.AddGrade(gradeInt);
         }
-        
+
         public override void AddGrade(string grade)
         {
             switch (grade)
