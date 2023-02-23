@@ -22,37 +22,13 @@
 
         public int Age { get; set; }
 
-        public override Statistics GetStatistics()
-        {
-            var statSupervisor = new Statistics();
-
-            statSupervisor.Average = 0;
-            statSupervisor.Min = float.MaxValue;
-            statSupervisor.Max = float.MinValue;
-
-            foreach (var grade in this.grades)
-            {
-                statSupervisor.Max = Math.Max(statSupervisor.Max, grade);
-                statSupervisor.Min = Math.Min(statSupervisor.Min, grade);
-
-                statSupervisor.Average += grade;
-            }
-            statSupervisor.Average/= this.grades.Count;
-
-            return statSupervisor;
-        }
-        public override void AddGrade(int grade)
-        {
-            float gradeInt = (float)grade;
-            this.AddGrade(gradeInt);
-        }
-
         public override void AddGrade(string grade)
         {
             switch (grade)
             {
                 case "1":
                     this.grades.Add(0);
+
                     break;
 
                 case "1+":
@@ -131,17 +107,32 @@
 
         public override void AddGrade(char grade)
         {
-            throw new Exception("");
+            throw new NotImplementedException();
         }
-
-        public override void AddGrade(float grade)
-        {
-            throw new Exception("");
-        }
-
         public override void AddGrade(double grade)
         {
-            throw new Exception("");
+            throw new NotImplementedException();
+        }
+        public override void AddGrade(float grade)
+        {
+            throw new NotImplementedException();
+        }
+        public override void AddGrade(int grade)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public override Statistics GetStatistics()
+        {
+            var statSupervisor = new Statistics();
+
+            foreach (var grade in grades)
+            {
+                statSupervisor.AddGrade(grade);
+            }
+
+            return statSupervisor;
         }
 
         public override Statistics CountStatistics(List<float> grades)

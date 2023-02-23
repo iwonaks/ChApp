@@ -19,5 +19,11 @@ namespace ConsoleApp23
         void AddGrade(char grade);
 
         Statistics GetStatistics();
+
+        delegate void FeedbakToAddGrade(Object sender, EventArgs args);
+
+        event FeedbakToAddGrade GradeAddedToStatistics;
+
+        event FeedbakToAddGrade GradeSaveToFile;
     }
 }

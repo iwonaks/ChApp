@@ -56,6 +56,13 @@ namespace ConsoleApp23
             }
         }
 
+        public override void AddGrade(double grade)
+        {
+            float gradeFloat = (float)grade;
+
+            this.AddGrade(gradeFloat);
+        }
+
         public override void AddGrade(float grade)
         {
             if (grade>=0 && grade <= 100)
@@ -71,6 +78,13 @@ namespace ConsoleApp23
             {
                 throw new Exception("invalid garde value");
             }
+        }
+
+        public override void AddGrade(int grade)
+        {
+            float gradeInt = (float)grade;
+
+            this.AddGrade(gradeInt);
         }
 
         public override void AddGrade(string grade)
@@ -89,66 +103,17 @@ namespace ConsoleApp23
             }
         }
 
-        public override void AddGrade(double grade)
-        {
-            float gradeFloat = (float)grade;
-
-            this.AddGrade(gradeFloat);
-        }
-
-        public override void AddGrade(int grade)
-        {
-            float gradeInt = (float)grade;
-
-            this.AddGrade(gradeInt);
-        }
-
         public override Statistics GetStatistics()
         {
             var stat = new Statistics();
 
-            stat.Average = 0;
-            stat.Min = float.MaxValue;
-            stat.Max = float.MinValue;
-
-            foreach (var grade in this.grades)
+            foreach(var grade in this.grades) 
             {
-                stat.Max = Math.Max(stat.Max, grade);
-                stat.Min = Math.Min(stat.Min, grade);
-
-                stat.Average += grade;
+                stat.AddGrade(grade);
             }
-            stat.Average/= this.grades.Count;
-
-            GetAverageAsLetter(stat);
-
             return stat;
         }
-        private static void GetAverageAsLetter(Statistics stat)
-        {
-            switch (stat.Average)
-            {
-                case var a when a == 100:
-                    stat.AverageLetter = 'A';
-                    break;
-
-                case var a when a  >= 80:
-                    stat.AverageLetter = 'B';
-                    break;
-
-                case var a when a  >= 50:
-                    stat.AverageLetter = 'C';
-                    break;
-
-                case var a when a  >= 30:
-                    stat.AverageLetter = 'D';
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
+        
         public override Statistics CountStatistics(List<float> grades)
         {
             throw new NotImplementedException();

@@ -18,6 +18,33 @@ namespace ConsoleApp23
             this.Name = name;
             this.Surname = surname;
         }
+
+        event IEmployee.FeedbakToAddGrade IEmployee.GradeAddedToStatistics
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        event IEmployee.FeedbakToAddGrade IEmployee.GradeSaveToFile
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public abstract void AddGrade(int grade);
         public abstract void AddGrade(float grade);
         public abstract void AddGrade(double grade);

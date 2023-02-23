@@ -119,32 +119,23 @@ namespace ConsoleApp23
             }
             return grades;
         }
-    
-    public override Statistics CountStatistics(List<float> grades)
-    {
-        var stat = new Statistics();
 
-        stat.Average = 0;
-        stat.Min = float.MaxValue;
-        stat.Max = float.MinValue;
-
-
-        foreach (var grade in grades)
+        public override Statistics CountStatistics(List<float> grades)
         {
-            stat.Max = Math.Max(stat.Max, grade);
-            stat.Min = Math.Min(stat.Min, grade);
+            var stat = new Statistics();
 
-            stat.Average += grade;
+           foreach(var grade in grades)
+            {
+                stat.AddGrade(grade);
+            }
+
+            return stat;
         }
-        stat.Average/= grades.Count;
-
-        return stat;
+        public override Statistics GetStatistics()
+        {
+            var gradesFromList = ReadGradesFromFile();
+            var result = CountStatistics(gradesFromList);
+            return result;
+        }
     }
-    public override Statistics GetStatistics()
-    {
-        var gradesFromList = ReadGradesFromFile();
-        var result = CountStatistics(gradesFromList);
-        return result;
-    }
-}
 }

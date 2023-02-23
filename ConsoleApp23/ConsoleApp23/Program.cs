@@ -1,13 +1,15 @@
 ﻿using ConsoleApp23;
 
+//var employee = new EmployeeInMemory();
 var employee = new EmployeeInFile();
+var supervisor = new Supervisor();
 
 employee.GradeAddedToStatistics+=EmployeeGradeAdded;
 employee.GradeSaveToFile+= EmployeeGradeSaveToFile;
 
 void EmployeeGradeAdded(object sender, EventArgs args)
 {
-    Console.WriteLine("Dołączono oceny z pliku do statystyk");
+    Console.WriteLine("Dodano ocenę");
 }
 
 void EmployeeGradeSaveToFile(object sender, EventArgs args)
@@ -15,20 +17,18 @@ void EmployeeGradeSaveToFile(object sender, EventArgs args)
     Console.WriteLine("Zapisano ocenę w pliku");
 }
 
-//employee.AddGrade(70);
-//employee.AddGrade(80);
-//employee.AddGrade(10);
-var supervisor = new Supervisor();
 
-Console.WriteLine("Aby podać ocenę dla pracownika wciśnij 1\nAby podać ocenę dla supervisora wciśnij 2\nAby zakończyć q");
-
-string input = Console.ReadLine().ToUpper();
-
-switch (input)
+Console.WriteLine("Aby podać ocenę dla pracownika wybierz P\nAby podać ocenę dla supervisora wybierz S\nAby zakończyć Q\nPo dodaniu oceny klawisz V podaje statystyki dla danej grupy");
+Console.WriteLine("======================================================================================");
+while (true)
 {
-    case "1":
-        while (true)
-        {
+    Console.WriteLine("Ocena pracownika wybierz P\nOcena supervisora wybierz  S\n");
+    string input = Console.ReadLine().ToUpper();
+
+    switch (input)
+    {
+        case "P":
+
             Console.WriteLine("Podaj ocenę pracownika, Aby zobaczyć statystyki wciśnij V");
             var inputEmployee = Console.ReadLine().ToUpper();
 
@@ -58,45 +58,46 @@ switch (input)
             {
                 System.Environment.Exit(0);
             }
-        }
-        break;
 
-    case "2":
+            break;
 
-        while (true)
-        {
-            Console.WriteLine("Podaj ocenę supervisora  (od 1 do 6, akceptowalne znaki +/-ocena), aby zakończyć i zobaczyć statystyki wciśnij 'q'");
+        case "S":
 
-            var inputSupervisor = Console.ReadLine().ToUpper();
-
-            if (inputSupervisor != "Q" && inputSupervisor !="V")
+            while (true)
             {
-                try
+                Console.WriteLine("Podaj ocenę supervisora  (od 1 do 6, akceptowalne znaki +/-ocena)");
+
+                var inputSupervisor = Console.ReadLine().ToUpper();
+
+                if (inputSupervisor != "Q" && inputSupervisor !="V")
                 {
-                    supervisor.AddGrade(inputSupervisor);
+                    try
+                    {
+                        supervisor.AddGrade(inputSupervisor);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"We catched exception {ex.Message}");
+                    }
                 }
-                catch (Exception ex)
+                else if (inputSupervisor == "V")
                 {
-                    Console.WriteLine($"We catched exception {ex.Message}");
+                    var statisticsSupervisor = supervisor.GetStatistics();
+                    Console.WriteLine($"Najniższa ocena: {statisticsSupervisor.Min},\nnajwyższa: {statisticsSupervisor.Max},\nŚrednia ocen: {statisticsSupervisor.Average:N2}");
+                }
+                else
+                {
+                    System.Environment.Exit(0);
                 }
             }
-            else if (inputSupervisor == "V")
-            {
-                var statisticsSupervisor = supervisor.GetStatistics();
-                Console.WriteLine($"Najniższa ocena: {statisticsSupervisor.Min},\nnajwyższa: {statisticsSupervisor.Max},\nŚrednia ocen: {statisticsSupervisor.Average:N2}");
-            }
-            else
-            {
-                System.Environment.Exit(0);
-            }
-        }
-        break;
+            break;
 
-    case "Q":
-        System.Environment.Exit(0);
-        break;
+        case "Q":
+            System.Environment.Exit(0);
+            break;
 
-    default:
-        Console.WriteLine("Wprowadź właściwy klawisz");
-        break;
+        default:
+            Console.WriteLine("Wprowadź właściwy klawisz");
+            break;
+    }
 }
