@@ -1,11 +1,8 @@
 ﻿using ConsoleApp23;
+using System.Runtime.CompilerServices;
 
 //var employee = new EmployeeInMemory();
-var employee = new EmployeeInFile();
-var supervisor = new Supervisor();
 
-employee.GradeAddedToStatistics+=EmployeeGradeAdded;
-employee.GradeSaveToFile+= EmployeeGradeSaveToFile;
 
 void EmployeeGradeAdded(object sender, EventArgs args)
 {
@@ -22,43 +19,54 @@ Console.WriteLine("Aby podać ocenę dla pracownika wybierz P\nAby podać ocenę
 Console.WriteLine("======================================================================================");
 while (true)
 {
+    var employee = new EmployeeInFile();
+    var supervisor = new Supervisor();
+
+    employee.GradeAddedToStatistics+=EmployeeGradeAdded;
+    employee.GradeSaveToFile+= EmployeeGradeSaveToFile;
+
     Console.WriteLine("Ocena pracownika wybierz P\nOcena supervisora wybierz  S\n");
     string input = Console.ReadLine().ToUpper();
 
     switch (input)
     {
         case "P":
+            Console.WriteLine("Podaj imię pracownika");
+            string name = Console.ReadLine().ToUpper();
+            employee.Name = name;
 
-            Console.WriteLine("Podaj ocenę pracownika, Aby zobaczyć statystyki wciśnij V");
-            var inputEmployee = Console.ReadLine().ToUpper();
-
-            if (inputEmployee != "Q" && inputEmployee !="V")
+            while (true)
             {
-                try
+                Console.WriteLine("Podaj ocenę pracownika, Aby zobaczyć statystyki wciśnij V");
+                var inputEmployee = Console.ReadLine().ToUpper();
+
+                if (inputEmployee != "Q" && inputEmployee !="V")
                 {
-                    employee.AddGrade(inputEmployee);
+                    try
+                    {
+                        employee.AddGrade(inputEmployee);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"We catched exception {ex.Message}");
+                    }
                 }
-                catch (Exception ex)
+                else if (inputEmployee == "V")
                 {
-                    Console.WriteLine($"We catched exception {ex.Message}");
+                    var statisticsEmployee = employee.GetStatistics();
+
+                    Console.WriteLine($"Najniższa ocena: {statisticsEmployee.Min},\nnajwyższa: {statisticsEmployee.Max},\nŚrednia ocen: {statisticsEmployee.Average:N2}");
+
+                    if (statisticsEmployee.Max>=30)
+                    {
+                        Console.WriteLine($"Ocena końcowa: {statisticsEmployee.AverageLetter}");
+                    }
+                }
+                else
+                {
+                    System.Environment.Exit(0);
                 }
             }
-            else if (inputEmployee == "V")
-            {
-                var statisticsEmployee = employee.GetStatistics();
-
-                Console.WriteLine($"Najniższa ocena: {statisticsEmployee.Min},\nnajwyższa: {statisticsEmployee.Max},\nŚrednia ocen: {statisticsEmployee.Average:N2}");
-
-                if (statisticsEmployee.Max>=30)
-                {
-                    Console.WriteLine($"Ocena końcowa: {statisticsEmployee.AverageLetter}");
-                }
-            }
-            else
-            {
-                System.Environment.Exit(0);
-            }
-
             break;
 
         case "S":

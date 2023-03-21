@@ -5,8 +5,8 @@ namespace ConsoleApp23
 {
     internal class EmployeeInFile : EmployeeBase
     {
-        private const string fileName = "gradesEmployee.txt";
-
+        public string Name { get; set; }
+      
         public override event FeedbakToAddGrade GradeAddedToStatistics;
         public override event FeedbakToAddGrade GradeSaveToFile;
 
@@ -16,13 +16,15 @@ namespace ConsoleApp23
 
         public EmployeeInFile(int age, string name, string surname) : base(age, name, surname)
         {
+            this.Name = name;
+            
         }
 
         public override void AddGrade(float grade)
         {
             if (grade>=0 && grade <= 100)
             {
-                using (var writer = File.AppendText(fileName))
+                using (var writer = File.AppendText($"{Name}.txt"))
                 {
                     writer.WriteLine(grade);
 
@@ -100,9 +102,9 @@ namespace ConsoleApp23
         {
             var grades = new List<float>();
 
-            if (File.Exists(fileName))
+            if (File.Exists($"{Name}.txt"))
             {
-                using (var reader = File.OpenText(fileName))
+                using (var reader = File.OpenText($"{Name}.txt"))
                 {
                     var line = reader.ReadLine();
                     while (line!=null)
